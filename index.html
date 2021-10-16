@@ -3,38 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <title>Easy Youtube Thumbnail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Easy Youtube Thumbnail</h1>
-    <button name="download" id="download">Download</button>
-    <canvas>
+    <div id="container" class="m-3">
+        <h1>Easy Youtube Thumbnail</h1>
+        <button name="download" id="download">Download</button>
+        <canvas>
 
-    </canvas>
-    <h1>Settings</h1>
-    <form name="setting" id="setting">
-        <h2>Select Game</h2>
-        <select name="game" id="game">
-            <option value="BeatSaber">BeatSaber</option>
-            <option value="CHUNITHM">CHUNITHM</option>
-            <option value="GrooveCoaster">GrooveCoaster</option>
-            <option value="maimai">maimai</option>
-            <option value="MuseDash">MuseDash</option>
-            <option value="SDVX">SDVX</option>
-            <option value="WACCA">WACCA</option>
-        </select>
-        <h2>Song Name</h2>
-        <input name="name" id="name" type="text" />
-        <h2>Song Name Color</h2>
-        <input name="namecolor" id="namecolor" type="color" />
-        <h2>Song Cover</h2>
-        <input name="cover" id="cover" type="file" accept="image" />
-        <h2>Background Image</h2>
-        <input name="bg" id="bg" type="file" accept="image" />
-        <h2>Background Image Blur</h2>
-        <input name="blur" id="blur" type="range" min="0" max="100" value="0" />
-        <div id="blurtext"></div>
-        <button id="submit">Submit</button>
-    </form>
+        </canvas>
+        <hr>
+        <h1>Settings</h1>
+        <form name="setting" id="setting">
+            <div class="mb-3 row">
+                <label for="selectLayout" class="col-sm-2 col-form-label">Select Layout</label>
+                <div class="col-sm-10">
+                    <select id="selectLayout" class="form-select">
+                        <option selected value="CubeCommunity">CubeCommunity</option>
+                        <option selected value="izuna">izuna</option>
+                        <option selected value="johadesu">johadesu</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="imageSize" class="col-sm-2 col-form-label">Select Size</label>
+                <div class="col-sm-10">
+                    <select id="imageSize" class="form-select">
+                        <option selected value="1080p">1080p</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="game" class="col-sm-2 col-form-label">Select Game</label>
+                <div class="col-sm-10">
+                    <select id="game" class="form-select">
+                        <option selected value="BeatSaber">BeatSaber</option>
+                        <option value="CHUNITHM">CHUNITHM</option>
+                        <option value="DANGAKU">DANGAKU</option>
+                        <option value="DJMAX RESPECT">DJMAX RESPECT</option>
+                        <option value="GrooveCoaster">GrooveCoaster</option>
+                        <option value="maimai">maimai</option>
+                        <option value="MuseDash">MuseDash</option>
+                        <option value="ProjectSekai">ProjectSekai</option>
+                        <option value="SDVX">SDVX</option>
+                        <option value="WACCA">WACCA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="songName" class="col-sm-2 col-form-label">Song Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="songName">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="songAuthor" class="col-sm-2 col-form-label">Song Author</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="songAuthor">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="songArtist" class="col-sm-2 col-form-label">Song Artist</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="songArtist">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="songName" class="col-sm-2 col-form-label">Text Color</label>
+                <div class="col-sm-10">
+                    <input type="color" class="form-control form-control-color" id="textcolor">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="songCover" class="col-sm-2 col-form-label">Song Cover</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" id="songCover" accept="image">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="bgImage" class="col-sm-2 col-form-label">BG Image</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control" id="bgImage" accept="image">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="blur" class="col-sm-2 col-form-label">BG Blur</label>
+                <div class="col-sm-10">
+                    <input type="range" class="form-range" id="blur" min="0" max="100">
+                    <div id="blurtext"></div>
+                </div>
+            </div>
+            <button id="submit">Submit</button>
+        </form>
+    </div>
+
     <script>
         var slider = document.getElementById("blur");
         var output = document.getElementById("blurtext");
