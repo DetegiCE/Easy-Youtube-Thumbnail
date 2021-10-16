@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Easy Youtube Thumbnail</title>
+</head>
+<body>
+    <h1>Easy Youtube Thumbnail</h1>
+    <button name="download" id="download">Download</button>
+    <canvas>
+
+    </canvas>
+    <h1>Settings</h1>
+    <form name="setting" id="setting">
+        <h2>Select Game</h2>
+        <select name="game" id="game">
+            <option value="BeatSaber">BeatSaber</option>
+            <option value="CHUNITHM">CHUNITHM</option>
+            <option value="GrooveCoaster">GrooveCoaster</option>
+            <option value="maimai">maimai</option>
+            <option value="MuseDash">MuseDash</option>
+            <option value="SDVX">SDVX</option>
+            <option value="WACCA">WACCA</option>
+        </select>
+        <h2>Song Name</h2>
+        <input name="name" id="name" type="text" />
+        <h2>Song Name Color</h2>
+        <input name="namecolor" id="namecolor" type="color" />
+        <h2>Song Cover</h2>
+        <input name="cover" id="cover" type="file" accept="image" />
+        <h2>Background Image</h2>
+        <input name="bg" id="bg" type="file" accept="image" />
+        <h2>Background Image Blur</h2>
+        <input name="blur" id="blur" type="range" min="0" max="100" value="0" />
+        <div id="blurtext"></div>
+        <button id="submit">Submit</button>
+    </form>
+    <script>
+        var slider = document.getElementById("blur");
+        var output = document.getElementById("blurtext");
+        output.innerHTML = slider.value;
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+        }
+    </script>
+</body>
+</html>
