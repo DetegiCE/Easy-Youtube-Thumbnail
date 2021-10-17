@@ -9,8 +9,8 @@
 <body>
     <div id="container" class="m-3">
         <h1>Easy Youtube Thumbnail</h1>
-        <button name="download" id="download">Download</button>
-        <canvas>
+        <button type="button" class="btn btn-warning" id="dl" onclick="canvasDl()">Download</button>
+        <canvas id="canvas" width="1920" height="1080">
 
         </canvas>
         <hr>
@@ -94,7 +94,7 @@
                     <div id="blurtext"></div>
                 </div>
             </div>
-            <button id="submit">Submit</button>
+            <button type="button" class="btn btn-primary" id="submit" onclick="refresh()">Submit</button>
         </form>
     </div>
 
@@ -104,6 +104,48 @@
         output.innerHTML = slider.value;
         slider.oninput = function() {
             output.innerHTML = this.value;
+        }
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const bgImage = document.getElementById("bgImage");
+        const img = new Image();
+
+        bgImage.onchange = function(e) {
+
+            var files = e.target.files;
+            var file = files[0];
+            if(file.type.match('image.*')) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e2) {
+                    if(e2.target.readyState === FileReader.DONE)  {
+                        img.onload = function() {
+                            ctx.filter = 'blur('+String(slider.value)+'px)'
+                            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 1920, 1080);
+                            ctx.filter = 'blur(0px)'
+                            ctx.font = "50px Arial";
+                            ctx.textAlign = 'center'
+                            ctx.fillText('test', 960, 600)
+                        }
+                        img.src = e2.target.result;
+                    }
+                }
+            }
+            else {
+                alert("Not an image");
+            }
+        }
+
+        function canvasDl() {
+            var dataURL = canvas.toDataURL('image/png');
+            dataURL = dataURL.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+            dataURL = dataURL.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+
+            var aTag = document.createElement('a');
+            aTag.download = 'from_canvas.png';
+            aTag.href = dataURL;
+            aTag.click();
         }
     </script>
 </body>
