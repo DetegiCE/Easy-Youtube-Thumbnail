@@ -10,9 +10,13 @@
 <body>
     <div id="container" class="m-3">
         <h1>Easy Youtube Thumbnail</h1>
-        <canvas id="canvas" width="1920" height="1080"></canvas>
-        <br>
+        <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#canvas-div" aria-expanded="false" aria-controls="canvas-div">
+            Preview
+        </button>
         <button type="button" class="btn btn-warning" id="dl" onclick="canvasDl()">Download</button>
+        <div class="collapse" id="canvas-div">
+            <canvas id="canvas" width="1920" height="1080"></canvas>
+        </div>
         <hr>
         <h1>Settings</h1>
         <form name="setting" id="setting">
