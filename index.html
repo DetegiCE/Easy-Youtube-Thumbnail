@@ -24,7 +24,9 @@
         <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#canvas-div" aria-expanded="false" aria-controls="canvas-div">
             Preview
         </button>
-        <button type="button" class="btn btn-warning" id="dl" onclick="canvasDl()">Download</button>
+        <button type="button" class="btn btn-warning" id="dl-jpg" onclick="canvasDl('jpg')">Download <span class="badge" style="background-color: #F1D88A; color: black">JPG</span></button>
+        <button type="button" class="btn btn-warning" id="dl-png" onclick="canvasDl('png')">Download <span class="badge" style="background-color: #F1D88A; color: black">PNG</span></button>
+        <button type="button" class="btn btn-warning" id="dl-webp" onclick="canvasDl('webp')">Download <span class="badge" style="background-color: #F1D88A; color: black">WEBP</span></button>
         <button type="button" class="btn btn-primary" id="submit" onclick="submission()">Save Setting</button>
         <div class="collapse" id="canvas-div">
             <canvas id="canvas"></canvas>
@@ -333,13 +335,13 @@
 
 
 
-        function canvasDl() {
-            var dataURL = canvas.toDataURL('image/png');
+        function canvasDl(fmt) {
+            var dataURL = canvas.toDataURL('image/'+fmt);
             dataURL = dataURL.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-            dataURL = dataURL.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+            dataURL = dataURL.replace(/^data:application\/octet-stream/, 'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.'+fmt);
 
             var aTag = document.createElement('a');
-            aTag.download = 'from_canvas.png';
+            aTag.download = 'EZYT-Thumbnail.'+fmt;
             aTag.href = dataURL;
             aTag.click();
         }
