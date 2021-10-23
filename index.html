@@ -8,9 +8,9 @@
     <script>
         window.onload = function() {
             var selectElem = document.getElementById("font");
-            let fonts = ['TmonMonsori', 'BaeminJua', 'BaeminDoyeon', 'BaeminEuljiro', 'BaeminYeonsung']
+            let fonts = ['TmonMonsori', 'BaeminJua', 'BaeminDohyeon', 'BaeminEuljiro', 'BaeminYeonsung']
             fonts.forEach(function(item, index, array) {
-                const font = new FontFace(item, 'url("assets/fonts/'+item+'") format("truetype")');
+                var font = new FontFace(item, 'url("assets/fonts/'+item+'.ttf") format("truetype")');
                 font.load();
                 document.fonts.add(font);
                 selectElem.add(new Option(item, item));
