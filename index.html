@@ -27,7 +27,7 @@
         <button type="button" class="btn btn-warning" id="dl" onclick="canvasDl()">Download</button>
         <button type="button" class="btn btn-primary" id="submit" onclick="submission()">Save Setting</button>
         <div class="collapse" id="canvas-div">
-            <canvas id="canvas" width="1920" height="1080"></canvas>
+            <canvas id="canvas"></canvas>
         </div>
         <hr>
         <h1>Settings</h1>
@@ -47,6 +47,10 @@
                 <div class="col-sm-10">
                     <select id="imageSize" class="form-select">
                         <option selected value="1080p">1080p</option>
+                        <option value="960p">960p</option>
+                        <option value="720p">720p</option>
+                        <option value="480p">480p</option>
+                        <option value="360p">360p</option>
                     </select>
                 </div>
             </div>
@@ -199,6 +203,16 @@
             const subtitlecolor = document.getElementById("subtextcolor").value;
             const subtitle = document.getElementById("subtitle").value;
             const gamename = document.getElementById("game").value;
+            const resolution = document.getElementById("imageSize").value;
+
+            var resW = 1.0;
+            if(resolution === "720p") resW = resW * 2.0 / 3.0;
+            else if(resolution === "480p") resW = resW * 4.0 / 9.0;
+            else if(resolution === "360p") resW = resW * 1.0 / 3.0;
+            else if(resolution === "960p") resW = resW * 8.0 / 9.0;
+
+            canvas.setAttribute("width", 1920 * resW);
+            canvas.setAttribute("height", 1080 * resW);
 
             var file = bgImage.files[0];
             if(file.type.match('image.*')) {
@@ -208,7 +222,7 @@
                     if(e2.target.readyState === FileReader.DONE)  {
                         img.onload = function() {
                             ctx.filter = 'blur('+String(slider.value)+'px)'
-                            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 1920, 1080);
+                            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 1920 * resW, 1080 * resW);
 
                             var file2 = songCover.files[0];
                             if(file2.type.match('image.*')) {
@@ -217,7 +231,7 @@
                                 reader2.onload = function(e3) {
                                     if(e3.target.readyState === FileReader.DONE) {
                                         img3.onload = function() {
-                                            ctx.drawImage(img3, 685, 125, 550, 550);
+                                            ctx.drawImage(img3, 685 * resW, 125 * resW, 550 * resW, 550 * resW);
                                         }
                                         img3.src = e3.target.result;
                                     }
@@ -225,84 +239,84 @@
                             }
 
                             ctx.filter = 'blur(0px)'
-                            ctx.font = "bold "+String(slider2.value)+"px "+selFont;
+                            ctx.font = "bold "+String(slider2.value * resW)+"px "+selFont;
                             ctx.fillStyle = titlecolor;
                             ctx.textAlign = 'center'
-                            ctx.fillText(title, 960, 825)
+                            ctx.fillText(title, 960 * resW, 825 * resW)
 
-                            ctx.font = "bold "+String(slider3.value)+"px "+selFont;
+                            ctx.font = "bold "+String(slider3.value * resW)+"px "+selFont;
                             ctx.fillStyle = subtitlecolor;
                             ctx.textAlign = 'center';
-                            ctx.fillText(subtitle, 960, 950)
+                            ctx.fillText(subtitle, 960 * resW, 950 * resW)
 
                             if(gamename === "BeatSaber") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/beatsaber.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1520, -20);
+                                    ctx.drawImage(img2, 1520 * resW, -20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "CHUNITHM") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/chunithm.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "DANKAGU") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/dankagu.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, -20);
+                                    ctx.drawImage(img2, 1500 * resW, -20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "DJMAXRESPECTV") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/djmaxrespectv.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "GrooveCoaster") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/groovecoaster.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "maimai") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/maimai.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "MuseDash") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/musedash.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "ProjectSekai") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/proseka.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "SDVX") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/sdvx6.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                             else if(gamename === "WACCA") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/waccarev.png';
                                 img2.onload = function() {
-                                    ctx.drawImage(img2, 1500, 20);
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
                             }
                         }
