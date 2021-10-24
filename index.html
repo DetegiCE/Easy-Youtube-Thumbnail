@@ -69,6 +69,7 @@
                         <option value="MuseDash">MuseDash</option>
                         <option value="ProjectSekai">ProjectSekai</option>
                         <option value="SDVX">SDVX</option>
+                        <option value="TapSonicTOP">TapSonicTOP</option>
                         <option value="WACCA">WACCA</option>
                     </select>
                 </div>
@@ -316,6 +317,13 @@
                             else if(gamename === "SDVX") {
                                 var img2 = new Image();
                                 img2.src = 'assets/img/sdvx6.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
+                                }
+                            }
+                            else if(gamename === "TapSonicTOP") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/tapsonictop.png';
                                 img2.onload = function() {
                                     ctx.drawImage(img2, 1500 * resW, 20 * resW, img2.width * resW, img2.height * resW);
                                 }
