@@ -39,7 +39,7 @@
                 <div class="col-sm-10">
                     <select id="selectLayout" class="form-select">
                         <option selected value="SuiSensei">SuiSensei</option>
-                        <option value="izuna">izuna (WIP)</option>
+                        <option value="izuna">izuna</option>
                         <option value="johadesu">johadesu (WIP)</option>
                     </select>
                 </div>
@@ -206,6 +206,20 @@
         const img3 = new Image();
 
         function submission() {
+            const selLayout = document.getElementById("selectLayout").value;
+            if(selLayout === "SuiSensei") {
+                submission1();
+            }
+            else if(selLayout === "izuna") {
+                submission2();
+            }
+            else {
+                alert("Not Available");
+            }
+
+        }
+
+        function submission1() {
             const selFont = document.getElementById("font").value;
             const title = document.getElementById("title").value;
             const titlecolor = document.getElementById("textcolor").value;
@@ -347,7 +361,157 @@
 
         }
 
+        function submission2() {
+            const selFont = document.getElementById("font").value;
+            const title = document.getElementById("title").value;
+            const titlecolor = document.getElementById("textcolor").value;
+            const subtitlecolor = document.getElementById("subtextcolor").value;
+            const subtitle = document.getElementById("subtitle").value;
+            const gamename = document.getElementById("game").value;
+            const resolution = document.getElementById("imageSize").value;
 
+
+
+            var resW = 1.0;
+            if(resolution === "720p") resW = resW * 2.0 / 3.0;
+            else if(resolution === "480p") resW = resW * 4.0 / 9.0;
+            else if(resolution === "360p") resW = resW * 1.0 / 3.0;
+            else if(resolution === "960p") resW = resW * 8.0 / 9.0;
+
+            canvas.setAttribute("width", 1920 * resW);
+            canvas.setAttribute("height", 1080 * resW);
+
+            var file = bgImage.files[0];
+            if(file.type.match('image.*')) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(e2) {
+                    if(e2.target.readyState === FileReader.DONE)  {
+                        img.onload = function() {
+                            ctx.filter = 'blur('+String(slider.value)+'px)'
+                            ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 1920 * resW, 1080 * resW);
+
+                            var file2 = songCover.files[0];
+                            if(file2.type.match('image.*')) {
+                                var reader2 = new FileReader();
+                                reader2.readAsDataURL(file2);
+                                reader2.onload = function(e3) {
+                                    if(e3.target.readyState === FileReader.DONE) {
+                                        img3.onload = function() {
+                                            ctx.drawImage(img3, 70 * resW, 230 * resW, 500 * resW, 500 * resW);
+                                        }
+                                        img3.src = e3.target.result;
+                                    }
+                                }
+                            }
+
+                            ctx.filter = 'blur(0px)'
+                            ctx.font = "bold "+String(slider2.value * resW)+"px "+selFont;
+                            ctx.fillStyle = titlecolor;
+                            ctx.textAlign = 'center'
+                            ctx.fillText(title, 960 * resW, 825 * resW)
+
+                            ctx.font = "bold "+String(slider3.value * resW)+"px "+selFont;
+                            ctx.fillStyle = subtitlecolor;
+                            ctx.textAlign = 'center';
+                            ctx.fillText(subtitle, 960 * resW, 950 * resW)
+
+                            if(gamename === "BeatSaber") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/beatsaber.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "CHUNITHM") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/chunithm.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "DANKAGU") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/dankagu.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "DJMAXRESPECTV") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/djmaxrespectv.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "GrooveCoaster") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/groovecoaster.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "maimai") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/maimai.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "MuseDash") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/musedash.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "ProjectSekai") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/proseka.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "SDVX") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/sdvx6.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "TapSonicTOP") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/tapsonictop.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+                            else if(gamename === "WACCA") {
+                                var img2 = new Image();
+                                img2.src = 'assets/img/waccarev.png';
+                                img2.onload = function() {
+                                    ctx.drawImage(img2, 1350 * resW, 150 * resW, img2.width * resW * 1.25, img2.height * resW * 1.25);
+                                }
+                            }
+
+                            var img_t = new Image();
+                            img_t.src = 'assets/img/izuna/t.png';
+                            img_t.onload = function() {
+                                ctx.drawImage(img_t, 0, 0, 1920 * resW, 1080 * resW);
+                            }
+                        }
+                        img.src = e2.target.result;
+
+
+                    }
+                }
+            }
+            else {
+                alert("Not an image");
+            }
+
+
+        }
 
         function canvasDl(fmt) {
             var dataURL = canvas.toDataURL('image/'+fmt);
