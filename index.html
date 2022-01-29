@@ -261,7 +261,16 @@
                                 }
                             }
 
+                            var gap = Number(125 - slider3.value);
+                            ctx.globalAlpha = 0.5;
                             ctx.filter = 'blur(0px)'
+                            ctx.fillStyle = subtitlecolor;
+                            ctx.fillRect(0, (825-Number(slider2.value))*resW, 1920 * resW, (Number(slider2.value)+Number(gap)) * resW);
+
+                            ctx.fillStyle = titlecolor;
+                            ctx.fillRect(0, (825+Number(gap))*resW, 1920 * resW, (Number(slider3.value)+Number(gap)*0.75) * resW);
+
+                            ctx.globalAlpha = 1.0;
                             ctx.font = "bold "+String(slider2.value * resW)+"px "+selFont;
                             ctx.fillStyle = titlecolor;
                             ctx.textAlign = 'center'
