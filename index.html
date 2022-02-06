@@ -30,6 +30,18 @@
         <button type="button" class="btn btn-primary" id="submit" onclick="submission()">Save Setting</button>
         <div class="collapse" id="canvas-div">
             <canvas id="canvas"></canvas>
+            <div class="mb-3 row">
+                <label for="yt-title" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="yt-title">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="yt-desc" class="col-sm-2 col-form-label">Desc</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="yt-desc"></textarea>
+                </div>
+            </div>
         </div>
         <hr>
         <h1>Settings</h1>
@@ -174,6 +186,42 @@
                     <span class="badge" style="background-color: #43074C">WACCA INFERNO</span>
                 </div>
             </div>
+            <div class="mb-3 row">
+                <label for="artist" class="col-sm-2 col-form-label">Artist</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="artist">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="koreantag" class="col-sm-2 col-form-label">Korean Tag</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="koreantag">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="diff" class="col-sm-2 col-form-label">Difficulty</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="diff">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="level" class="col-sm-2 col-form-label">Level</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="level">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="fullcombo" class="col-sm-2 col-form-label">FC+/FC/AM/ML</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="fullcombo">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="perc" class="col-sm-2 col-form-label">Percentage</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="perc">
+                </div>
+            </div>
         </form>
     </div>
     <script>
@@ -227,6 +275,27 @@
             const subtitle = document.getElementById("subtitle").value;
             const gamename = document.getElementById("game").value;
             const resolution = document.getElementById("imageSize").value;
+
+            const yttitle = document.getElementById("yt-title");
+            const ytdesc = document.getElementById("yt-desc");
+            const diff = document.getElementById("diff");
+            const fcombo = document.getElementById("fullcombo");
+            const perc = document.getElementById("perc");
+            const artist = document.getElementById("artist");
+            const level = document.getElementById("level");
+            const kortag = document.getElementById("koreantag");
+            yttitle.value = `[${gamename}] ${title} | ${diff.value} (`;
+            if(fcombo === "None") yttitle.value += `${perc.value}%)`;
+            else yttitle.value += `${fcombo.value}, ${perc.value}%)`;
+
+            ytdesc.value = "";
+            if(gamename === "WACCA") ytdesc.value += "#WACCA #왓카 ";
+            if(gamename === "maimai") ytdesc.value += "#maimai #마이마이 ";
+            ytdesc.value += `${title} - ${artist.value}\n${diff.value} ☆${level.value} (`;
+            if(fcombo === "None") ytdesc.value += `${perc.value}%)\n\n`;
+            else ytdesc.value += `${fcombo.value}, ${perc.value}%)\n\n`;
+            ytdesc.value += `#${title.split(' ').join('')} #${artist.value.split(' ').join('')}\n`
+            ytdesc.value += `#${kortag.value.split(' ').join(' #')}\n\n`;
 
             var resW = 1.0;
             if(resolution === "720p") resW = resW * 2.0 / 3.0;
